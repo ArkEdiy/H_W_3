@@ -4,7 +4,7 @@ users = [
     {"name": "John Doe", "birthday": "1985.01.23"},
     {"name": "Jane Smith", "birthday": "1990.01.27"},
     {"name": "Adelina Ford", "birthday": "1999.03.13"},
-    {"name": "Adelan Hord", "birthday": "1997.03.15"}
+    {"name": "Adelan Hord", "birthday": "1997.03.16"}
 ]
 
 def get_upcoming_birthdays(users):
@@ -21,8 +21,11 @@ def get_upcoming_birthdays(users):
 
         days_until_birthday = (birthday_this_year - today).days # знаходження кількості днів до дн
 
-        # Перевірка,чи день народженя випадає вперед на 7 днів і чи це не вихідний
-        if 0 <= days_until_birthday <= 7 and birthday_this_year.weekday() < 5:
+        # Перевірка,чи день народженя випадає вперед на 7 днів
+        if 0 <= days_until_birthday <= 7:
+           while birthday_this_year.weekday() >= 5: #Перенесення дати привітання на наступний понеділок, якщо вихідний
+            birthday_this_year += timedelta(days=1)
+            
             #додавання інформації до списку
             upcoming_birthdays.append({
                 "name": user["name"],
