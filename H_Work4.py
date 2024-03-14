@@ -2,11 +2,12 @@ from datetime import datetime, timedelta
 
 users = [
     {"name": "John Doe", "birthday": "1985.03.2"},
-    {"name": "John Doe", "birthday": "1985.03.7"},
-    {"name": "John Doe", "birthday": "1985.03.10"},
-    {"name": "Jane Smith", "birthday": "1990.03.11"},
+    {"name": "Jane Smith", "birthday": "1990.03.13"},
     {"name": "Adelina Ford", "birthday": "1999.03.14"},
-    {"name": "Adelan Hord", "birthday": "1997.03.16"}
+    {"name": "Adelan Hord", "birthday": "1997.03.16"},
+    {"name": "John Doe", "birthday": "1985.03.17"},
+    {"name": "Adelan Hord", "birthday": "1997.03.20"},
+    {"name": "John Doe", "birthday": "1985.03.26"}
 ]
 
 def get_upcoming_birthdays(users):
@@ -17,9 +18,9 @@ def get_upcoming_birthdays(users):
         birthday = datetime.strptime(user["birthday"], "%Y.%m.%d").date()
         birthday_this_year = datetime(today.year, birthday.month, birthday.day).date() # визначення дн для поточного року
 
-        start_of_week = today - timedelta(days=today.weekday()) #Визначення першого дня поточного тижня (понеділок)
+        next_week = today + timedelta(days=7) # Визначення дати через тиждень
 
-        if start_of_week <= birthday_this_year <= start_of_week + timedelta(days=7):
+        if today <= birthday_this_year <= next_week:
             # якщо дн вже було в цьому році, переносимо його на наступний рік
             if birthday_this_year < today:
                 birthday_this_year += timedelta(days=365)
